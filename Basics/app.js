@@ -44,12 +44,27 @@ app.post("/register", async (req, res) => {
   //console.log(req.body);
   res.send("registered");
 });
-app.get("/about", (req, res) => {
-  res.send("Software engineer");
+
+app.get("/get-user", (req, res) => {
+  userModel
+    .findOne({
+      username: "Ali",
+    })
+    .then((user) => {
+      console.log(req.send);
+
+      res.send(user);
+    });
 });
-app.get("/project", (req, res) => {
-  res.send("working on them");
-});
+
+app.get('/update-user', async (req, res) => {
+  await userModel.findOneAndUpdate({
+    username:'shahzad'
+  },{
+    email:'nadeem@gmail.com'
+  })
+  res.send('updated')
+})
 app.post("/form-data", (req, res) => {
   console.log(req.body);
 
